@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route, Link } from 'react-router-dom';
 import ChatBot from './chatbot/chat-bot.JSX';
 import HomeDashboard from "./home/home.jsx"
+import JournalHistory from "./moodHistory/history.jsx"
 
 
 export const url_domain = "http://127.0.0.1:5000"
@@ -14,9 +15,10 @@ function App() {
     <div>
       <nav>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/about">About</Link> |{" "}
-        <Link to="/contact">Contact</Link>
+        {/* <Link to="/about">About</Link> |{" "}
+        <Link to="/contact">Contact</Link> */}
         <Link to="/chat-bot">Chatbot</Link>
+        <Link to="/mood-history">Mood History</Link>
       </nav>
 
       <Routes>
@@ -24,6 +26,8 @@ function App() {
         {/*<Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} /> */}
         <Route path="/chat-bot" element={<ChatBot />} />
+        <Route path="/mood-history" element={<JournalHistory />} />
+        
       </Routes>
     </div>
   )

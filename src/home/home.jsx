@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./home.css";
 import { url_domain } from "../App";
 import MoodGraph from "./graph";
+import { Link } from 'react-router-dom';
+
 
 function HomeDashboard() {
   const [step, setStep] = useState("mood"); 
@@ -98,6 +100,7 @@ function HomeDashboard() {
           Remember, healing is not a race — it’s a journey.  
           You are stronger than you think!"
         </p>
+        <Link to="/mood-history">Want to see previous emotions?</Link>
       </div>
 
       {/* Last Week Performance*/}
