@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./home.css";
 import { url_domain } from "../App";
+import MoodGraph from "./graph";
 
 function HomeDashboard() {
   const [step, setStep] = useState("mood"); 
   const [selectedMood, setSelectedMood] = useState(null);
   const [talk, setTalk] = useState("");
+  const [moods, setMoods] = useState([]);
 
   // Send payload to backend
   const handleSubmit = async () => {
@@ -16,7 +18,7 @@ function HomeDashboard() {
     };
 
     try {
-      const res = await fetch(`${url_domain}/save-emotion`, {
+      const res = await fetch(`${url_domain}/api/save-emotion`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -32,9 +34,23 @@ function HomeDashboard() {
     }
   };
 
-  const getLastWeekEmotion = async ()=>{
+  useEffect(() => {
+    const getLastWeekEmotion = async () => {
+      try {
+        const res = await fetch(`${url_domain}/api/get-emotion`);
+        if (!res.ok) throw new Error("Failed to fetch moods");
+  
+        const data = await res.json();
+        console.log(data);
+        setMoods(data);
+      } catch (err) {
+        console.error("Error fetching moods:", err);
+      }
+    };
+  
+    getLastWeekEmotion();
+  }, []);
 
-  }
 
   return (
     <div className="home-container">
@@ -87,7 +103,7 @@ function HomeDashboard() {
       {/* Last Week Performance*/}
       <div className="emotion-feeling">
         <h3>Emotion Chart</h3>
-        
+        <MoodGraph moods={moods} />
       </div>
     </div>
   );
