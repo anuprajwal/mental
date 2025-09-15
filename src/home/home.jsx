@@ -28,11 +28,36 @@ function HomeDashboard() {
 
       if (res.ok) {
         setStep("done");
+        playMoodMusic(selectedMood);
       } else {
         console.error("Failed to save entry");
       }
     } catch (err) {
       console.error("Error submitting entry:", err);
+    }
+  };
+
+  const playMoodMusic = (mood) => {
+    let musicFile = "";
+  
+    switch (mood) {
+      case "HAPPY":
+        musicFile = "/audio/happy.mp3";
+        break;
+      case "SAD":
+        musicFile = "/audio/sad.mp3"; 
+        break;
+      case "ANGRY":
+        musicFile = "/audio/relax.mp3";
+        break;
+      default:
+        musicFile = "/audio/neutral.mp3";
+    }
+  
+    const player = document.getElementById("moodPlayer");
+    if (player) {
+      player.src = musicFile;
+      player.play();
     }
   };
 
@@ -108,6 +133,9 @@ function HomeDashboard() {
         <h3>Emotion Chart</h3>
         <MoodGraph moods={moods} />
       </div>
+
+      {/* Audio Player (hidden) */}
+      <audio id="moodPlayer" style={{ display: "none" }} />
     </div>
   );
 }
