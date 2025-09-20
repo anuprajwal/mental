@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 import { Routes, Route, Link } from 'react-router-dom';
-import ChatBot from './chatbot/chat-bot.JSX';
+import ChatBot from './chatbot/chat-bot.jsx';
 import HomeDashboard from "./home/home.jsx"
 
 
-export const url_domain = "http://127.0.0.1:5000"
+export const url_domain = "http://13.235.99.42:5000/api"
 
 
 function App() {
